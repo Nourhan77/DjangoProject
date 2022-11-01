@@ -1,0 +1,106 @@
+{% extends 'projects/base.html'%}
+
+{% block content %}
+<div> <a href="{% url 'profile' project.user.id %} "> <h2>back to profile</h2> </a></div>
+
+
+<form action="{% url 'total' project.id   %}" method="POST">
+    {% csrf_token %}
+<div>
+<ul >
+        <li>Created by: {{project.user}}</li>      
+
+    <li> donations : {{project.user.donations}}</li>
+{% if project.image  %}
+    <li>Project image:<image src="{{project.image.url}}" alt="{{project.image.url}}"  width="200" height="200">
+        </li>
+{% endif %}
+
+    <br>
+    <li><h3> Title:{{project.title}}</h3> </li>
+    <li>Details:{{ project.details}} </li>
+    <li> category : {{project.category}}</li>
+    <li> total_target : {{project.total_target}}</li>
+    <li> Average rate : {{project.avg_rate}}</li>
+
+    <li><h3> Tags:{{project.Tags.0}}</h3> </li>
+
+    <li>Donation: <input id="number" type='number' label='donate value: ' name='donate0' value="{{project.donate}}" /></li>
+    <li>Rating : <input id="number" type='number' label='rating value: ' name='rating' value="{{project.rate}}" /></li>
+
+    <button type="submit" name="Submit">Donate</button>
+
+    {% if project.reported == True %}
+    <h1><font color="red">Reported Project </font> </li></h1>
+    {% endif %}
+
+
+    
+
+        
+   
+</ul>
+
+
+
+
+
+</div>
+
+</form>
+
+
+<form action="{% url 'comment' project.id   %}" method="POST">
+    {% csrf_token %}
+
+    <li>Comments :</li>
+ <ol>   
+    {% for comm in comments %}
+    
+
+       <li> {{ comm }} &emsp; &emsp;         {% if comm.reported == True %}
+        <font color="red">Reported Comment</font> </li>
+        {% else %}
+        <a href="{% url 'report' project.id comm.id %} "> report comment</a>
+        {% endif %}
+    {% endfor %}
+    
+
+ </ol>
+
+    <li> <input id="text" type='text' label='comment: ' name='comment' placeholder="add comment" value="" /></li>
+    <button type="submit" name="Submit">Add comment</button>
+</form>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+<form action ="{% url 'photos' project.id %}" method="POST"  accept-charset="utf-8" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <label for="myfile">Select a file:</label>
+<input type="file" id="myfile" name="images">
+<input id="text"  type="hidden" label='project: ' name='project'  value="{{project.id}}" >
+
+    <button type="submit" name="Submit">Add Photo</button>
+
+  <div>
+<li><h3> photos:</h3> </li>
+
+    {% for photo in photos %}
+    <image src="{{photo.images.url}}" alt="{{photo.images.url}}"  width="200" height="200">
+        
+    {% endfor %}
+    
+</div>
+
+</form>
+
+
+{% endblock %}

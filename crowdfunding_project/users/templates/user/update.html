@@ -1,0 +1,17 @@
+{% extends 'projects/base.html'%}
+
+{% block content %}
+
+<form action='' method = "POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>first <input type = "text" name = "first" value="" /></p>
+    <p>second <input type = "text" name = "second" value="" /></p>
+    <p>mobile_phone <input type = "text" name = "mobile_phone" value="" /></p>
+    <p>birthdate <input type = "text" name = "birthdate" value="" /></p>
+    <p>facebook <input type = "text" name = "facebook" value="" /></p>
+    <p>country <input type = "text" name = "country" value="" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+
+{% endblock %}

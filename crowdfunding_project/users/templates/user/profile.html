@@ -1,0 +1,49 @@
+{% extends 'projects/base.html'%}
+
+{% block content %}
+
+<div>
+   <div> <a href="{% url 'home' %} "> <h2>Home Page</h2> </a></div>
+
+   <h2> My Profile :</h2>
+
+   <div> <a href="{% url 'edit' user.id %} "> <h2>edit profile</h2> </a></div>
+
+<ul >
+   <h3> Picture:</h3>
+   {% if user.profile_image %}
+   <image src="{{user.profile_image.url}}" alt="{{user.profile_image.url}}" width="500" height="600">
+   {% endif %}
+    
+            <li><h3> First name:{{user.First_name}}</h3> </li>
+            <li> Last name:{{ user.Last_name}} </li>
+            <li> Email : {{user.Email}}</li>
+            <li> Mobile : {{user.mobile_phone}}</li>
+            <li> donations : {{user.donations}}</li>
+
+
+</ul>
+
+<h2> My Projects :</h2>
+<ol>
+{% for proj in projects %}
+       <li><a href="{% url 'Proj_details' proj.id %} "> {{ proj.title }} </a> </br> <a href="{% url 'project_delete' proj.id  %} "> delete </a>
+
+    </li> {% endfor %}
+</ol>
+
+<li><a href="{% url 'project_form' user.id %} ">create project</a></li>
+
+</div>
+
+
+
+
+<div>
+<h2><a href="{% url 'home' %} ">All Projects</a> </h2>
+
+
+
+</div>
+
+{% endblock %}
