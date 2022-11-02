@@ -165,9 +165,7 @@ def details (request,project_id):
 def home(request):
     highest_projects= Project.objects.order_by('-avg_rate')[:5]
     latest_projects= Project.objects.order_by('avg_rate')[:5]
-    categories=Project.objects.values('category').distinct()
-
-
+    categories=Categories.objects.all()
 
     context={
         "highest_projects":highest_projects,
@@ -175,7 +173,6 @@ def home(request):
         "categories":categories
     }
     return render(request,"projects/home.html",context)
-
 
 
 
