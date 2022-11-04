@@ -1,9 +1,10 @@
 form 
 {
-    border: 6px solid rgb(112, 136, 112) ;
-    border-radius: 15px;
+    border: 4px solid rgb(141, 142, 112) ;
+    border-radius: 10px;
     font-size: x-large;
-    background-color:;
+  
+   
   }
 
 
@@ -12,9 +13,10 @@ form
 display: flex;
 justify-content: center;
     text-align: center;
-    color:#46bf1a;
+    color:rgb(246, 246, 8);
   
 }
+
 
 a { text-decoration: none; }
 
