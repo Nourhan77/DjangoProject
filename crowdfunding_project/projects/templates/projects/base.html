@@ -2,41 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
- <meta charset="UTF-8">
-<style>
-form 
-{
-    border: 1px solid rgb(192, 32, 32);
-    border-radius: 5px;
-  }
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
 
-
-  h1{
-    
-display: flex;
-justify-content: center;
-    text-align: center;
-    color:rgb(38, 0, 255);
-}
-
-
-</style>
  
 
 </head>
 
 
-<body>
+<body style=" font-size: xx-large; background-color:#c6e2c6;">
 
-        <h1>Crowdfunding Project</h1>
+        <h1 style= "font-family: Cursive; font-weight: bold; ">Crowdfunding Project</h1>
         
         {% block content %}
         Defult content
         {% endblock %}
         
-        <h5>thank you </h5>
-        
+       
 
 
     

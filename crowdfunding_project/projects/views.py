@@ -1,9 +1,10 @@
+from unicodedata import name
 from rest_framework.response import Response
 from django.shortcuts import render,redirect , get_object_or_404
 
 
 from .forms import ImageForm, ProjectForm ,CommentForm, TagForm
-from .models import Project,Comment, ProjectImage
+from .models import Categories, Project,Comment, ProjectImage
 from users.models import User
 
 def donate (request,project_id):
@@ -52,14 +53,40 @@ def categorypProjects (request,category):
 
 
 
-def searchedProjects (request):
+def searchedProjects (request,user_id):
+    ptag=request.POST.get('ptag')
     ptitle=request.POST.get('ptitle')
-    projects=Project.objects.filter(title=ptitle)
+    projects=Project.objects.all()
+    # print("Project",projects[0].Tags.values()[1]["name"])
+    for project in projects:
+        if ptag:
+            for key in project.Tags.values():
+                if  ptag == key["name"]:
+                    projects=Project.objects.filter( Tags__iexact=key["id"])
+                
+        
+        elif ptitle:
+
+            projects=Project.objects.filter(title__iexact=ptitle)
+
+
     context={
-        "projects":projects
+        "projects":projects,
+
+        "user_id":user_id
     }
 
     return render (request,"projects/searchedProjects.html",context)
+
+
+def allProjects (request,user_id):
+    
+    projects=Project.objects.all()
+    context={
+        "projects":projects,
+        "user_id":user_id
+    }
+    return render (request,"projects/allProjects.html",context)
 
 
 
@@ -80,17 +107,6 @@ def CreateProject (request,user_id):
     return render (request ,'projects/project_form.html' , {'user_id':user_id,'form':form})
 
 
-def CreateTag (request,project_id):
-    if request.method=="POST":
-        form=TagForm(request.POST)
-        if form.is_valid():
-            project=get_object_or_404(Project,pk=project_id)
-            form.instance.project=project
-            form.save()
-            return redirect ("Proj_details",project_id=project.id)
-    else:
-        form = TagForm()
-    return render (request ,'projects/tag.html' , {'form':form})
 
 
 
@@ -138,7 +154,7 @@ def uploadimages(request,project_id):
             project.save()
             photos = ProjectImage.objects.filter(project=project.id)
 
-            print("Photo",photos[0], name,type(photos))
+            # print("Photo",photos[0], name,type(photos))
 
             return redirect ("Proj_details",project_id=project.id)
     else:
@@ -162,17 +178,16 @@ def details (request,project_id):
 
 
 
-def home(request):
+def home(request,user_id):
     highest_projects= Project.objects.order_by('-avg_rate')[:5]
     latest_projects= Project.objects.order_by('avg_rate')[:5]
-    categories=Project.objects.values('category').distinct()
-
-
+    categories=Categories.objects.all()
 
     context={
         "highest_projects":highest_projects,
         "latest_projects":latest_projects,
-        "categories":categories
+        "categories":categories,
+        "user_id":user_id
     }
     return render(request,"projects/home.html",context)
 

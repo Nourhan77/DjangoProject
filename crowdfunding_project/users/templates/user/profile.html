@@ -2,48 +2,65 @@
 
 {% block content %}
 
-<div>
-   <div> <a href="{% url 'home' %} "> <h2>Home Page</h2> </a></div>
 
-   <h2> My Profile :</h2>
+   <div style="float:left; padding: 5px; height: 600px;">
+   <form style="  width: 1150px;  display:inline-block;">
+      <div  style="font-size: large; display: inline-block;"> 
+         <a href="{% url 'home' user.id %}  ">
+            <h3 style="display: inline-block;">Home Page|</h3>
+         </a>
+         <a href="{% url 'allProjects' user.id  %} ">
+            <h3 style="display: inline-block;">All Projects|</h3>
+         </a>
+         <a href="{% url 'edit' user.id %} ">
+            <h3 style="display: inline-block;">edit profile</h3>
+         </a>
+      </div>
 
-   <div> <a href="{% url 'edit' user.id %} "> <h2>edit profile</h2> </a></div>
+      <h2> My Profile :</h2>
+      <ul>
+         <h3> Picture:</h3>
+         {% if user.profile_image %}
+            <image src="{{user.profile_image.url}}" alt="{{user.profile_image.url}}" width="200" height="200">
+         {% endif %}
 
-<ul >
-   <h3> Picture:</h3>
-   {% if user.profile_image %}
-   <image src="{{user.profile_image.url}}" alt="{{user.profile_image.url}}" width="500" height="600">
-   {% endif %}
-    
-            <li><h3> First name:{{user.First_name}}</h3> </li>
+            <li>
+               <h3> First name:{{user.First_name}}</h3>
+            </li>
             <li> Last name:{{ user.Last_name}} </li>
             <li> Email : {{user.Email}}</li>
             <li> Mobile : {{user.mobile_phone}}</li>
             <li> donations : {{user.donations}}</li>
+            <li> Birth date : {{user.birthdate}}</li>
+            <li> Facebook : {{user.facebook}}</li>
+            <li> Country: {{user.country}}</li>
 
 
-</ul>
+      </ul>
+   </form>
+</div>
 
-<h2> My Projects :</h2>
-<ol>
-{% for proj in projects %}
-       <li><a href="{% url 'Proj_details' proj.id %} "> {{ proj.title }} </a> </br> <a href="{% url 'project_delete' proj.id  %} "> delete </a>
 
-    </li> {% endfor %}
-</ol>
+<div style="float:right; padding: 5px;  height: 744px; ">
+   <form style="font-size: large; height: 100%; width: 285px; display:inline-block; ">
+      <h3> My Projects :</h3>
+      <ol>
+         {% for proj in projects %}
+         <li>
+            <a style="display: inline-block;" href="{% url 'Proj_details' proj.id %} "> {{ proj.title }} </a>
+            {% if proj.total_target > 1 %}
+            <a style="display: inline-block; color:rgb(168, 15, 36); font-weight: bold;"
+               href="{% url 'project_delete' proj.id  %} "> |delete| </a>
+            {% endif %}
+         </li> {% endfor %}
+      </ol>
 
-<li><a href="{% url 'project_form' user.id %} ">create project</a></li>
+      <h3><a style=" color:rgb(77, 8, 59);" href="{% url 'project_form' user.id %} ">***create project***</a></h3>
+   </form>
 
 </div>
 
 
 
-
-<div>
-<h2><a href="{% url 'home' %} ">All Projects</a> </h2>
-
-
-
-</div>
 
 {% endblock %}

@@ -5,7 +5,27 @@
    
   {% csrf_token %}
 
-    {{ form.as_p }}
+  {% if error == "Invalid mobile phone number it should be like that 01123456789" %}
+
+<div class ="alert alert-danger "  role="alert"  style ="background-color:rgb(245, 100, 100); "  >
+    {{error}}
+</div>
+
+{% elif error == "Password and confirmation not matching" %}
+<div class ="alert alert-danger "  role="alert"  style ="background-color:rgb(245, 100, 100); "  >
+    {{error}}
+</div>
+
+{% elif error == "Upload an image,Please" %}
+<div class ="alert alert-danger "  role="alert"  style ="background-color:rgb(245, 100, 100); "  >
+    {{error}}
+</div>
+    {% endif %}
+
+
+    
+    {{ form.as_p }} 
+
     
     <button type="submit" name="Submit">Submit</button>
 

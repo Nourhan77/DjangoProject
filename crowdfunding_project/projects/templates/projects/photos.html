@@ -1,12 +1,10 @@
-
-
-<form action ="" method="POST"  accept-charset="utf-8" enctype="multipart/form-data">
+<form action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
 
     {% csrf_token %}
 
     {{ form.as_p }}
-    
+
     <button type="submit" name="Submit">Submit</button>
 
-  
+
 </form>

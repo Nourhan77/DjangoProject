@@ -1,7 +1,9 @@
 form 
 {
-    border: 1px solid rgb(226, 209, 209);
-    border-radius: 5px;
+    border: 6px solid rgb(112, 136, 112) ;
+    border-radius: 15px;
+    font-size: x-large;
+    background-color:;
   }
 
 
@@ -10,5 +12,26 @@ form
 display: flex;
 justify-content: center;
     text-align: center;
-    color:rgb(38, 0, 255);
+    color:#46bf1a;
+  
+}
+
+a { text-decoration: none; }
+
+
+button
+{
+  font-size: x-large;
+}
+
+
+input{
+
+  font-size: x-large;
+}
+
+button {
+
+  background-color:#0a0a23;
+  color: #fff;
 }

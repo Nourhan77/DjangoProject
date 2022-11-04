@@ -4,12 +4,20 @@
 
 <form action='' method = "POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>first <input type = "text" name = "first" value="" /></p>
-    <p>second <input type = "text" name = "second" value="" /></p>
-    <p>mobile_phone <input type = "text" name = "mobile_phone" value="" /></p>
-    <p>birthdate <input type = "text" name = "birthdate" value="" /></p>
-    <p>facebook <input type = "text" name = "facebook" value="" /></p>
-    <p>country <input type = "text" name = "country" value="" /></p>
+    {% if error == "Complete Info" %}
+
+<div class ="alert alert-danger "  role="alert"  style ="background-color:rgb(245, 100, 100); "  >
+    {{error}}
+</div>
+{% endif %} 
+
+    <p>First_name <input type = "text" name = "First_name" value="{{user.First_name}}" /></p>
+    <p>Last_name <input type = "text" name = "Last_name" value="{{user.Last_name}}" /></p>
+    <p>Mobile_phone <input type = "text" name = "mobile_phone" value="{{user.mobile_phone}}"  /></p>
+    <p>Birthdate <input type = "date"  name = "birthdate" value="{{user.birthdate}}" /></p>
+    <p>facebook link <input type = "text" name = "facebook" value="{{user.facebook}}"  /></p>
+    <p>country <input type = "text" name = "country" value="{{user.country}}"  /></p>
+    <p>Email <input type = "text" name = "email" value="{{user.Email}}" readonly  /></p>
     <p><input type = "submit" value = "Submit" /></p>
 </form>
 

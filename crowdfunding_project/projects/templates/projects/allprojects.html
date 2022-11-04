@@ -1,0 +1,27 @@
+{% extends 'projects/base.html'%}
+
+{% block content %}
+
+<a href="{% url 'home' user_id %} ">Home</a>
+<form action ="" method="POST"  accept-charset="utf-8" enctype="multipart/form-data">
+
+    <div>
+        <h2> All Projects :</h2>  
+      <ul >
+          {% for project in projects %}
+              <li> 
+                  
+                    <a href="{% url 'Proj_details' project.id %} "> {{ project.title  }} </a> 
+            
+            </li>
+                
+          
+          {% endfor %}
+      
+      </ul>
+      </div>
+    
+
+
+</form>
+{% endblock %}

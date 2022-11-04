@@ -3,24 +3,30 @@
 {% block content %}
 
 <div>
-    <a href="{% url 'home' %}"> Home </a> 
-    <h2> Projects :</h2>  
-  <ul >
-  
-      {% for project in projects %}
-  
-          <li> 
-              
-                <a href="{% url 'Proj_details' project.id %} "> {{ project.title  }} </a> 
-        
-        </li>
-            
-      
-      {% endfor %}
-  
+  <a href="{% url 'home' user_id %}"> Home </a>
+  <h2> Projects :</h2>
+  <ul>
+
+    {% if not projects %}
+    <h3>
+      <font color="red">No projects found </font>
+      </li>
+    </h3>
+    {% endif %}
+    {% for project in projects %}
+
+    <li>
+
+      <a href="{% url 'Proj_details' project.id %} "> {{ project.title }} </a>
+
+    </li>
+
+
+    {% endfor %}
+
   </ul>
 
-  
-  </div>
 
-  {% endblock %}
+</div>
+
+{% endblock %}
